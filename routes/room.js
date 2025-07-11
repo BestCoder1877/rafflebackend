@@ -35,7 +35,7 @@ app.post('/', async (req, res) => {
 	let connectionString = {
 		title: title,
 		code: code,
-		hostCode: hostCode,
+		hostCode: hostCode
 	};
 	if (isCompany) {
 		connectionString.isCompany = true;
@@ -44,7 +44,7 @@ app.post('/', async (req, res) => {
 			connectionString.ext = ext;
 		}
 	} else {
-		connectionString.isCompany = true;
+		connectionString.isCompany = false;
 	}
 	await collection.insertOne(connectionString);
 	res.send(await collection.findOne({ code: code }));
