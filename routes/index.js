@@ -14,4 +14,6 @@ app.get('/', async (req, res) => {
 	res.send({ status: 200 });
 });
 
+
+
 export default app;

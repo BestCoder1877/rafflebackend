@@ -3,6 +3,7 @@ import connect from '../config/connector.js';
 import generateId from '../config/generateId.js';
 let client;
 let collection;
+let roomsCollection;
 
 const app = express();
 app.use(express.json());
@@ -10,6 +11,7 @@ app.use(express.json());
 (async () => {
 	client = await connect();
 	collection = client.db('raffle').collection('items');
+	roomsCollection = client.db('raffle').collection('rooms');
 })();
 
 app.get('/:id', async (req, res) => {
@@ -18,8 +20,9 @@ app.get('/:id', async (req, res) => {
 	res.send(document);
 });
 
-app.get('/', async (req, res) => {
-	const document = await collection.find({}).toArray();
+app.get('/code/:code', async (req, res) => {
+	const code=req.params.code
+	const document = await collection.find({code:code}).toArray();
 	res.send(document);
 });
 app.delete('/:id', async (req, res) => {

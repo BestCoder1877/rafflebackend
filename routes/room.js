@@ -17,6 +17,16 @@ app.get('/:code', async (req, res) => {
 	const document = await collection.findOne({ code: code });
 	res.send(document);
 });
+app.get('/tocode/:hostCode', async (req, res) => {
+	const hostCode = req.params.hostCode;
+	const document = await collection.findOne({ hostCode: hostCode });
+	res.send(document.code);
+});
+app.get('/host/:code', async (req, res) => {
+	const code = req.params.code;
+	const document = await collection.findOne({ hostCode: code });
+	res.send(document);
+});
 app.post('/', async (req, res) => {
 	const title = req.body.title;
 	const isCompany = req.body.company;
@@ -35,7 +45,7 @@ app.post('/', async (req, res) => {
 	let connectionString = {
 		title: title,
 		code: code,
-		hostCode: hostCode
+		hostCode: hostCode,
 	};
 	if (isCompany) {
 		connectionString.isCompany = true;
@@ -56,8 +66,8 @@ app.put('/:code', async (req, res) => {
 		await collection.findOneAndUpdate(
 			{ code: code },
 			{ $set: { title: title } },
-			{ returnDocument: 'after' }
-		)
+			{ returnDocument: 'after' },
+		),
 	);
 });
 app.delete('/:code', async (req, res) => {
@@ -65,8 +75,8 @@ app.delete('/:code', async (req, res) => {
 	res.send(
 		await collection.findOneAndDelete(
 			{ code: code },
-			{ returnDocument: 'after' }
-		)
+			{ returnDocument: 'after' },
+		),
 	);
 });
 export default app;
