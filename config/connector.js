@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 const uri = process.env.DB_URI;
-
+console.log(uri)
 const client = new MongoClient(uri);
 export default async function connect() {
 	try {
