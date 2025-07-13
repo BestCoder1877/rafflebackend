@@ -5,10 +5,10 @@ import room from './routes/room.js';
 import item from './routes/item.js';
 import user from './routes/user.js';
 import shuffle from './routes/shuffle.js';
-import cors from 'cors'
+import cors from 'cors';
 
 dotenv.config();
-const app = express();
+const app = express.Router();
 app.use(cors());
 
 const port = process.env.PORT || 3000;
@@ -21,7 +21,7 @@ app.use('/', index);
 app.use('/room', room);
 app.use('/item', item);
 app.use('/user', user);
-app.use('/shuffle',shuffle)
+app.use('/shuffle', shuffle);
 
 app.listen(port, () => {
 	console.log(`Server running on port ${port}`);
