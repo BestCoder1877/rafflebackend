@@ -5,7 +5,7 @@ let client;
 let collection;
 let roomsCollection;
 
-const app = express();
+const app = express.Router();
 app.use(express.json());
 
 (async () => {
@@ -21,14 +21,17 @@ app.get('/:id', async (req, res) => {
 });
 
 app.get('/code/:code', async (req, res) => {
-	const code=req.params.code
-	const document = await collection.find({code:code}).toArray();
+	const code = req.params.code;
+	const document = await collection.find({ code: code }).toArray();
 	res.send(document);
 });
 app.delete('/:id', async (req, res) => {
 	const id = req.params.id;
 	res.send(
-		await collection.findOneAndDelete({ id: id }, { returnDocument: 'after' })
+		await collection.findOneAndDelete(
+			{ id: id },
+			{ returnDocument: 'after' },
+		),
 	);
 });
 app.post('/', async (req, res) => {
@@ -62,8 +65,8 @@ app.put('/:id', async (req, res) => {
 		await collection.findOneAndUpdate(
 			{ id: id },
 			{ $set: setVar },
-			{ returnDocument: 'after' }
-		)
+			{ returnDocument: 'after' },
+		),
 	);
 });
 

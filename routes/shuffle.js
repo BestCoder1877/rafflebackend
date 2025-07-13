@@ -4,7 +4,7 @@ import lodash from 'lodash';
 let client;
 let collection;
 
-const app = express();
+const app = express.Router();
 app.use(express.json());
 
 (async () => {

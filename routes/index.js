@@ -1,7 +1,7 @@
 import express from 'express';
 import connect from '../config/connector.js';
 
-const app = express();
+const app = express.Router();
 
 app.get('/', async (req, res) => {
 	const connector = await connect();

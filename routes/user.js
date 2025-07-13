@@ -3,7 +3,7 @@ import connect from '../config/connector.js';
 
 let client;
 let collection;
-const app = express();
+const app = express.Router();
 app.use(express.json());
 
 (async () => {
